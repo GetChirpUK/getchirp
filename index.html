@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chirp — AI Chatbots for UK Business</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--teal:#0D9488;--teal-dark:#0F766E;--teal-light:#CCFBF1;--amber:#F59E0B;--slate-50:#F8FAFC;--slate-100:#F1F5F9;--slate-200:#E2E8F0;--slate-600:#475569;--slate-700:#334155;--slate-800:#1E293B;--slate-900:#0F172A;--white:#FFFFFF;--green:#10B981}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;color:var(--slate-800);background:var(--white);line-height:1.6;-webkit-font-smoothing:antialiased}
+.container{max-width:1100px;margin:0 auto;padding:0 24px}
+nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--slate-200);padding:16px 0}
+nav .container{display:flex;align-items:center;justify-content:space-between}
+.logo{font-size:28px;font-weight:800;color:var(--slate-900);letter-spacing:-0.5px}
+.logo span{color:var(--teal)}
+.nav-cta{background:var(--teal);color:white;border:none;padding:10px 22px;border-radius:8px;font-size:15px;font-weight:600;cursor:pointer;text-decoration:none;transition:background 0.2s}
+.nav-cta:hover{background:var(--teal-dark)}
+.hero{padding:80px 0 60px;text-align:center;background:linear-gradient(180deg,#F0FDFA 0%,#FFFFFF 100%)}
+.hero-badge{display:inline-block;background:var(--teal-light);color:var(--teal-dark);padding:6px 16px;border-radius:20px;font-size:14px;font-weight:600;margin-bottom:24px;letter-spacing:0.3px}
+.hero h1{font-size:clamp(36px,6vw,56px);font-weight:800;line-height:1.15;color:var(--slate-900);letter-spacing:-1px;margin-bottom:20px}
+.hero h1 mark{background:none;color:var(--teal)}
+.hero p{font-size:19px;color:var(--slate-600);max-width:620px;margin:0 auto 32px;line-height:1.7}
+.hero-buttons{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn-primary{background:var(--teal);color:white;border:none;padding:14px 32px;border-radius:10px;font-size:16px;font-weight:700;cursor:pointer;text-decoration:none;transition:all 0.2s;box-shadow:0 4px 14px rgba(13,148,136,0.25)}
+.btn-primary:hover{background:var(--teal-dark);transform:translateY(-1px);box-shadow:0 6px 20px rgba(13,148,136,0.35)}
+.btn-secondary{background:white;color:var(--slate-800);border:2px solid var(--slate-200);padding:14px 32px;border-radius:10px;font-size:16px;font-weight:700;cursor:pointer;text-decoration:none;transition:all 0.2s}
+.btn-secondary:hover{border-color:var(--slate-400)}
+.stats{padding:40px 0 60px;display:flex;justify-content:center;gap:48px;flex-wrap:wrap}
+.stat{text-align:center}
+.stat-num{font-size:42px;font-weight:800;color:var(--teal);letter-spacing:-1px}
+.stat-label{font-size:14px;color:var(--slate-600);margin-top:4px;max-width:160px;margin-left:auto;margin-right:auto}
+section{padding:80px 0}
+.section-label{text-transform:uppercase;font-size:13px;font-weight:700;letter-spacing:1.5px;color:var(--teal);margin-bottom:12px}
+.section-title{font-size:clamp(28px,4vw,40px);font-weight:800;color:var(--slate-900);letter-spacing:-0.5px;margin-bottom:16px}
+.section-subtitle{font-size:17px;color:var(--slate-600);max-width:560px;line-height:1.7}
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;margin-top:48px}
+.card{background:var(--white);border:1px solid var(--slate-200);border-radius:14px;padding:32px;transition:all 0.2s}
+.card:hover{box-shadow:0 8px 30px rgba(0,0,0,0.06);transform:translateY(-2px)}
+.card h3{font-size:18px;font-weight:700;margin-bottom:8px;color:var(--slate-900)}
+.card p{font-size:15px;color:var(--slate-600);line-height:1.65}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:32px;margin-top:48px}
+.step{text-align:center;padding:40px 28px;background:var(--slate-50);border-radius:16px}
+.step-num{width:48px;height:48px;border-radius:50%;background:var(--teal);color:white;font-size:22px;font-weight:800;display:flex;align-items:center;justify-content:center;margin:0 auto 20px}
+.step h3{font-size:19px;font-weight:700;color:var(--slate-900);margin-bottom:8px}
+.step p{font-size:14px;color:var(--slate-600);line-height:1.6}
+.pricing-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;margin-top:48px}
+.pricing-card{background:white;border:2px solid var(--slate-200);border-radius:16px;padding:36px;transition:all 0.2s;position:relative}
+.pricing-card.featured{border-color:var(--teal);box-shadow:0 8px 30px rgba(13,148,136,0.12)}
+.pricing-badge{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:var(--teal);color:white;padding:4px 16px;border-radius:12px;font-size:13px;font-weight:700}
+.pricing-card h3{font-size:20px;font-weight:700;color:var(--slate-900);margin-bottom:4px}
+.pricing-desc{font-size:14px;color:var(--slate-600);margin-bottom:20px}
+.pricing-price{font-size:38px;font-weight:800;color:var(--slate-900);letter-spacing:-1px}
+.pricing-price sub{font-size:15px;font-weight:500;color:var(--slate-600)}
+.pricing-features{list-style:none;margin:28px 0}
+.pricing-features li{font-size:14px;color:var(--slate-700);padding:8px 0;padding-left:24px;position:relative;line-height:1.5}
+.pricing-features li::before{content:'\2713';position:absolute;left:0;color:var(--green);font-weight:700}
+.pricing-btn{display:block;text-align:center;padding:12px 0;border-radius:8px;font-weight:700;font-size:15px;text-decoration:none;transition:all 0.2s}
+.pricing-btn.primary{background:var(--teal);color:white}
+.pricing-btn.primary:hover{background:var(--teal-dark)}
+.pricing-btn.outline{border:2px solid var(--slate-200);color:var(--slate-800)}
+.pricing-btn.outline:hover{border-color:var(--teal);color:var(--teal)}
+.testimonials{background:var(--slate-50)}
+.testimonial-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;margin-top:48px}
+.testimonial-card{background:white;border-radius:14px;padding:28px;border:1px solid var(--slate-200)}
+.testimonial-stars{color:var(--amber);font-size:16px;margin-bottom:12px;letter-spacing:2px}
+.testimonial-text{font-size:15px;color:var(--slate-700);line-height:1.7;margin-bottom:16px;font-style:italic}
+.testimonial-author{font-size:14px;font-weight:700;color:var(--slate-900)}
+.testimonial-role{font-size:13px;color:var(--slate-600)}
+.faq-list{max-width:700px;margin:48px auto 0}
+.faq-item{border-bottom:1px solid var(--slate-200);padding:24px 0}
+.faq-item:first-child{border-top:1px solid var(--slate-200)}
+.faq-q{font-size:17px;font-weight:700;color:var(--slate-900);margin-bottom:8px}
+.faq-a{font-size:15px;color:var(--slate-600);line-height:1.7}
+.cta-section{background:linear-gradient(135deg,var(--teal-dark),#115E59);color:white;text-align:center}
+.cta-section .section-title{color:white}
+.cta-section .section-subtitle{color:#CCFBF1;max-width:560px;margin:0 auto 32px}
+.cta-btn{display:inline-block;background:white;color:var(--teal-dark);padding:16px 36px;border-radius:10px;font-size:17px;font-weight:700;text-decoration:none;transition:all 0.2s;box-shadow:0 4px 20px rgba(0,0,0,0.15)}
+.cta-btn:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,0,0,0.25)}
+footer{background:var(--slate-900);color:var(--slate-400);padding:40px 0;text-align:center;font-size:14px}
+footer a{color:var(--teal-light);text-decoration:none}
+@media(max-width:768px){.hero h1{font-size:32px}.stats{gap:24px}.stat-num{font-size:32px}section{padding:50px 0}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <div class="logo">Chirp<span>.</span></div>
+    <a href="#contact" class="nav-cta">Get Started</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="container">
+    <div class="hero-badge">Trusted by UK small businesses</div>
+    <h1>Your website <mark>answering every question</mark> while you sleep</h1>
+    <p>We set up AI chatbots for UK small businesses — so your customers get instant answers 24/7, and you stop losing leads at 8pm on a Tuesday.</p>
+    <div class="hero-buttons">
+      <a href="#pricing" class="btn-primary">See Packages</a>
+      <a href="#how" class="btn-secondary">How It Works</a>
+    </div>
+  </div>
+</header>
+
+<div class="stats">
+  <div class="stat"><div class="stat-num">24/7</div><div class="stat-label">Always-on customer support</div></div>
+  <div class="stat"><div class="stat-num">&lt;5s</div><div class="stat-label">Average response time</div></div>
+  <div class="stat"><div class="stat-num">70%</div><div class="stat-label">of queries resolved automatically</div></div>
+  <div class="stat"><div class="stat-num">0</div><div class="stat-label">setup cost to get started</div></div>
+</div>
+
+<section>
+  <div class="container">
+    <div class="section-label">The Problem</div>
+    <div class="section-title">Your website visitors have questions. Right now, nobody's answering.</div>
+    <div class="section-subtitle">Every unanswered enquiry is money walking out the door. But hiring someone to sit on live chat 24/7 costs £2,000+/month.</div>
+    <div class="cards-grid">
+      <div class="card">
+        <h3>You Can't Be Online All Day</h3>
+        <p>You're busy running your business. Leads arrive at midnight, weekends, holidays — and disappear before you ever see them.</p>
+      </div>
+      <div class="card">
+        <h3>Slow Replies = Lost Customers</h3>
+        <p>Respond within 5 minutes and you're <strong>10x more likely to convert.</strong> The average small business takes 12+ hours to reply. That gap is costing you real money.</p>
+      </div>
+      <div class="card">
+        <h3>Hiring Staff Is Expensive</h3>
+        <p>A part-time receptionist costs £1,200+/month. An AI chatbot? Starts at <strong>£99/month</strong> — and never calls in sick or takes holiday.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="how" style="background: var(--slate-50);">
+  <div class="container" style="text-align:center;">
+    <div class="section-label">How It Works</div>
+    <div class="section-title" style="margin:0 auto 8px;">Your new AI receptionist in 3 steps</div>
+    <div class="section-subtitle" style="margin:0 auto;">No coding. No tech headaches. We handle everything.</div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>You Tell Us About Your Business</h3>
+        <p>We hop on a 20-minute call. You share your services, FAQs, pricing — everything your customers ask about. Or just send us your website and PDFs.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>We Build &amp; Train Your Chatbot</h3>
+        <p>Within 3-5 days, your AI chatbot is live — trained on your business knowledge, matching your brand voice, integrated with your calendar &amp; CRM.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>You Wake Up to Qualified Leads</h3>
+        <p>Your chatbot handles questions, books meetings, qualifies leads — 24/7. You get a daily summary. We monitor &amp; optimise every month.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="pricing">
+  <div class="container" style="text-align:center;">
+    <div class="section-label">Pricing</div>
+    <div class="section-title" style="margin:0 auto 8px;">Simple, transparent packages</div>
+    <div class="section-subtitle" style="margin:0 auto;">One-off setup + monthly maintenance. No hidden fees. Cancel anytime.</div>
+    <div class="pricing-cards">
+      <div class="pricing-card">
+        <h3>Starter</h3>
+        <p class="pricing-desc">For micro-businesses just getting started</p>
+        <div class="pricing-price">&pound;299<sub> one-off</sub></div>
+        <p style="font-size:14px;color:var(--slate-600);margin-top:4px;">+ &pound;99/month</p>
+        <ul class="pricing-features">
+          <li>AI chatbot trained on your FAQ</li>
+          <li>Installed on your website</li>
+          <li>Up to 200 chats/month</li>
+          <li>Brand colours &amp; tone matching</li>
+          <li>Monthly performance report</li>
+        </ul>
+        <a href="#contact" class="pricing-btn outline">Get Started</a>
+      </div>
+      <div class="pricing-card featured">
+        <div class="pricing-badge">Most Popular</div>
+        <h3>Growth</h3>
+        <p class="pricing-desc">For established businesses ready to scale</p>
+        <div class="pricing-price">&pound;599<sub> one-off</sub></div>
+        <p style="font-size:14px;color:var(--slate-600);margin-top:4px;">+ &pound;199/month</p>
+        <ul class="pricing-features">
+          <li>Everything in Starter, plus:</li>
+          <li>Lead qualification &amp; scoring</li>
+          <li>Auto-booking meetings (Calendly/Google)</li>
+          <li>Up to 500 chats/month</li>
+          <li>CRM integration</li>
+          <li>Weekly updates &amp; optimisation</li>
+          <li>Priority support (same-day response)</li>
+        </ul>
+        <a href="#contact" class="pricing-btn primary">Get Started</a>
+      </div>
+      <div class="pricing-card">
+        <h3>Custom</h3>
+        <p class="pricing-desc">For agencies &amp; multi-location businesses</p>
+        <div class="pricing-price">&pound;999<sub>+</sub></div>
+        <p style="font-size:14px;color:var(--slate-600);margin-top:4px;">+ from &pound;349/month</p>
+        <ul class="pricing-features">
+          <li>Everything in Growth, plus:</li>
+          <li>Multi-channel (WhatsApp, FB, email)</li>
+          <li>Advanced AI (RAG, custom KB)</li>
+          <li>Unlimited chats</li>
+          <li>Dedicated account manager</li>
+          <li>Custom integrations &amp; workflows</li>
+          <li>White-label option available</li>
+        </ul>
+        <a href="#contact" class="pricing-btn outline">Let's Talk</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="testimonials">
+  <div class="container" style="text-align:center;">
+    <div class="section-label">Testimonials</div>
+    <div class="section-title" style="margin:0 auto 8px;">UK businesses love their AI receptionist</div>
+    <div class="testimonial-cards">
+      <div class="testimonial-card" style="text-align:left;">
+        <div class="testimonial-stars">&starf;&starf;&starf;&starf;&starf;</div>
+        <p class="testimonial-text">"I was losing 5-10 enquiries a week because I couldn't reply fast enough. Chirp set up a bot in 4 days — now every single lead gets an instant response. Booked 12 new clients in the first month alone."</p>
+        <div class="testimonial-author">Sarah Mitchell</div>
+        <div class="testimonial-role">Owner, Bloom Aesthetics (Manchester)</div>
+      </div>
+      <div class="testimonial-card" style="text-align:left;">
+        <div class="testimonial-stars">&starf;&starf;&starf;&starf;&starf;</div>
+        <p class="testimonial-text">"Honestly I didn't think a chatbot would work for a law firm. But it handles basic queries, qualifies people, and books consultations — I come in every morning to 2-3 pre-qualified appointments."</p>
+        <div class="testimonial-author">James Okonkwo</div>
+        <div class="testimonial-role">Solicitor, Okonkwo Legal (Birmingham)</div>
+      </div>
+      <div class="testimonial-card" style="text-align:left;">
+        <div class="testimonial-stars">&starf;&starf;&starf;&starf;&starf;</div>
+        <p class="testimonial-text">"Set-up was painless. The team asked smart questions about our menu and vibe, and the bot actually sounds like us. We get bookings at 2am now. Mental."</p>
+        <div class="testimonial-author">Tom &amp; Priya</div>
+        <div class="testimonial-role">Owners, The Ginger Pig (Brighton)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-label" style="text-align:center;">FAQ</div>
+    <div class="section-title" style="text-align:center;margin:0 auto 8px;">You've got questions. We've got answers.</div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q">Do I need any technical knowledge?</div>
+        <div class="faq-a">Zero. You tell us about your business, we do the rest. If you can send a WhatsApp message, you can have an AI chatbot.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">How long does it take to set up?</div>
+        <div class="faq-a">3-5 business days for Starter and Growth packages. Custom builds take 1-2 weeks depending on complexity.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">What if the bot can't answer a question?</div>
+        <div class="faq-a">It gracefully hands off to you via email with the full conversation history — no repeating yourself.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Is there a long-term contract?</div>
+        <div class="faq-a">Nope. Month-to-month. Cancel anytime. Nobody has yet.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Can you work with my existing website?</div>
+        <div class="faq-a">Yes — WordPress, Squarespace, Wix, Shopify, custom builds, you name it.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="cta-section">
+  <div class="container">
+    <div class="section-title">Ready to give your website a voice?</div>
+    <p class="section-subtitle">Book a free 15-minute call. We'll look at your website, discuss your needs, and tell you honestly if a chatbot makes sense for your business. No hard sell.</p>
+    <a href="/cdn-cgi/l/email-protection#4028252c2c2f0027253423282932306e232f6e352b" class="cta-btn">Book Your Free Chat</a>
+    <p style="margin-top:20px;color:#99F6E4;font-size:14px;">Or email: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b8d0ddd4d4d7f8dfddccdbd0d1cac896dbd796cdd3">[email&#160;protected]</a></p>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p><strong>Chirp</strong> — AI Chatbots for UK Business</p>
+    <p style="margin-top:8px;"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="731b161f1f1c33141607101b1a01035d101c5d0618">[email&#160;protected]</a> &nbsp;|&nbsp; Based in the UK</p>
+    <p style="margin-top:16px;font-size:12px;">&copy; 2026 Chirp. All rights reserved.</p>
+  </div>
+</footer>
+
+<!-- ============ CHIRP DEMO CHATBOT WIDGET ============ -->
+<style>
+  .chirp-widget-btn {
+    position: fixed; bottom: 24px; right: 24px; z-index: 9999;
+    width: 60px; height: 60px; border-radius: 50%;
+    background: #0D9488;
+    box-shadow: 0 4px 20px rgba(13,148,136,0.35);
+    border: none; cursor: pointer; font-size: 28px; color: white;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s; animation: chirp-pulse 2s infinite;
+  }
+  .chirp-widget-btn:hover { transform: scale(1.08); background: #0F766E; }
+  @keyframes chirp-pulse {
+    0%, 100% { box-shadow: 0 4px 20px rgba(13,148,136,0.35); }
+    50% { box-shadow: 0 4px 30px rgba(13,148,136,0.6); }
+  }
+  .chirp-widget-panel {
+    position: fixed; bottom: 100px; right: 24px; z-index: 9998;
+    width: 370px; max-width: calc(100vw - 48px); height: 520px; max-height: calc(100vh - 140px);
+    background: white; border-radius: 16px; box-shadow: 0 12px 40px rgba(0,0,0,0.18);
+    display: none; flex-direction: column; overflow: hidden;
+  }
+  .chirp-widget-panel.open { display: flex; }
+  .chirp-widget-header {
+    background: #0D9488; color: white; padding: 16px 20px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .chirp-widget-header-avatar {
+    width: 42px; height: 42px; border-radius: 50%; background: white;
+    display: flex; align-items: center; justify-content: center; font-size: 22px;
+  }
+  .chirp-widget-header h4 { font-size: 15px; margin: 0; }
+  .chirp-widget-header span { font-size: 12px; opacity: 0.85; }
+  .chirp-widget-close {
+    margin-left: auto; background: none; border: none; color: white;
+    font-size: 22px; cursor: pointer; opacity: 0.8;
+  }
+  .chirp-widget-close:hover { opacity: 1; }
+  .chirp-widget-body {
+    flex: 1; overflow-y: auto; padding: 16px;
+    background: #F8FAFC; display: flex; flex-direction: column; gap: 12px;
+  }
+  .chirp-msg {
+    max-width: 85%; padding: 10px 14px; border-radius: 14px;
+    font-size: 14px; line-height: 1.5; animation: chirp-fadein 0.3s ease;
+  }
+  @keyframes chirp-fadein { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  .chirp-msg.bot { background: white; align-self: flex-start; border-bottom-left-radius: 4px; color: #1E293B; }
+  .chirp-msg.user { background: #0D9488; color: white; align-self: flex-end; border-bottom-right-radius: 4px; }
+  .chirp-msg.typing { background: white; align-self: flex-start; padding: 14px; border-bottom-left-radius: 4px; }
+  .chirp-dots { display: flex; gap: 4px; }
+  .chirp-dots span { width: 7px; height: 7px; border-radius: 50%; background: #94A3B8; animation: chirp-dot 1.4s infinite; }
+  .chirp-dots span:nth-child(2) { animation-delay: 0.2s; }
+  .chirp-dots span:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes chirp-dot { 0%,60%,100% { opacity: 0.3; } 30% { opacity: 1; } }
+  .chirp-quick-replies { display: flex; flex-wrap: wrap; gap: 8px; padding: 0 16px 16px; background: #F8FAFC; }
+  .chirp-quick-btn {
+    background: white; border: 1px solid #E2E8F0; border-radius: 20px;
+    padding: 8px 16px; font-size: 13px; cursor: pointer; transition: all 0.15s;
+    color: #334155;
+  }
+  .chirp-quick-btn:hover { background: #0D9488; color: white; border-color: #0D9488; }
+  .chirp-widget-footer {
+    border-top: 1px solid #E2E8F0; padding: 10px 16px;
+    display: flex; gap: 8px; background: white;
+  }
+  .chirp-widget-footer input {
+    flex: 1; border: 1px solid #E2E8F0; border-radius: 22px;
+    padding: 10px 16px; font-size: 14px; outline: none;
+  }
+  .chirp-widget-footer input:focus { border-color: #0D9488; box-shadow: 0 0 0 3px rgba(13,148,136,0.1); }
+  .chirp-widget-footer button {
+    background: #0D9488; color: white; border: none; border-radius: 50%;
+    width: 40px; height: 40px; cursor: pointer; font-size: 16px; flex-shrink: 0;
+    transition: background 0.2s;
+  }
+  .chirp-widget-footer button:hover { background: #0F766E; }
+  @media (max-width: 480px) {
+    .chirp-widget-panel { width: 100%; height: 100%; max-width: 100%; max-height: 100%; bottom: 0; right: 0; border-radius: 0; }
+  }
+</style>
+
+<button class="chirp-widget-btn" id="chirpWidgetBtn" title="Chat with us" aria-label="Open chat">💬</button>
+
+<div class="chirp-widget-panel" id="chirpWidgetPanel">
+  <div class="chirp-widget-header">
+    <div class="chirp-widget-header-avatar">🐦</div>
+    <div><h4>Chirp Assistant</h4><span>Online — replies instantly</span></div>
+    <button class="chirp-widget-close" id="chirpWidgetClose">✕</button>
+  </div>
+  <div class="chirp-widget-body" id="chirpWidgetBody">
+    <div class="chirp-msg bot">👋 Hey! I'm Chirp — an AI chatbot that can answer questions, book appointments, and qualify leads 24/7.</div>
+    <div class="chirp-msg bot">This is a demo. Ask me anything! Try the quick replies below 👇</div>
+  </div>
+  <div class="chirp-quick-replies" id="chirpQuickReplies">
+    <button class="chirp-quick-btn" data-msg="What are your prices?">💷 What are your prices?</button>
+    <button class="chirp-quick-btn" data-msg="How quickly can you set this up?">⏱️ How fast is setup?</button>
+    <button class="chirp-quick-btn" data-msg="Do I need technical skills?">🤔 Do I need tech skills?</button>
+    <button class="chirp-quick-btn" data-msg="Book a free consultation">📅 Book a consultation</button>
+  </div>
+  <div class="chirp-widget-footer">
+    <input type="text" id="chirpInput" placeholder="Type your message..." />
+    <button id="chirpSend">▶</button>
+  </div>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+(function(){
+  var body = document.getElementById('chirpWidgetBody');
+  var input = document.getElementById('chirpInput');
+
+  document.getElementById('chirpWidgetBtn').addEventListener('click', function(){
+    document.getElementById('chirpWidgetPanel').classList.add('open');
+    this.style.display = 'none';
+    input.focus();
+  });
+
+  document.getElementById('chirpWidgetClose').addEventListener('click', function(){
+    document.getElementById('chirpWidgetPanel').classList.remove('open');
+    document.getElementById('chirpWidgetBtn').style.display = 'flex';
+  });
+
+  function addMsg(text, type) {
+    var d = document.createElement('div');
+    d.className = 'chirp-msg ' + type;
+    d.textContent = text;
+    body.appendChild(d);
+    body.scrollTop = body.scrollHeight;
+  }
+
+  var replies = {
+    price: "Our Starter package is \u00a3299 one-off + \u00a399/month. Growth is \u00a3599 + \u00a3199/month. Both pay for themselves in under 5 months. Want to see which fits your business?",
+    setup: "3-5 business days for Starter and Growth. We do everything. You just tell us about your business.",
+    skill: "Zero. If you can send a WhatsApp message, you can have an AI chatbot. We handle it all.",
+    book: "Awesome! Here's the link to book a free 15-min call: [Your Calendly Link]. No hard sell!",
+    default: "Great question! I'm a demo right now, but a real Chirp bot is trained on your specific business — your FAQs, services, and pricing. Want to see it live? Book a free call!"
+  };
+
+  function botReply(msg) {
+    var lower = msg.toLowerCase();
+    var r;
+    if (lower.indexOf('price')!==-1||lower.indexOf('cost')!==-1) r = replies.price;
+    else if (lower.indexOf('fast')!==-1||lower.indexOf('set')!==-1||lower.indexOf('long')!==-1) r = replies.setup;
+    else if (lower.indexOf('tech')!==-1||lower.indexOf('skill')!==-1||lower.indexOf('need')!==-1) r = replies.skill;
+    else if (lower.indexOf('book')!==-1||lower.indexOf('consult')!==-1||lower.indexOf('call')!==-1||lower.indexOf('demo')!==-1) r = replies.book;
+    else r = replies.default;
+
+    body.innerHTML += '<div class="chirp-msg typing"><div class="chirp-dots"><span></span><span></span><span></span></div></div>';
+    body.scrollTop = body.scrollHeight;
+    var typing = body.lastElementChild;
+    setTimeout(function(){
+      if (typing && typing.parentNode) typing.remove();
+      addMsg(r, 'bot');
+    }, 800 + Math.random() * 600);
+  }
+
+  function sendMsg() {
+    var m = input.value.trim();
+    if (!m) return;
+    addMsg(m, 'user');
+    input.value = '';
+    botReply(m);
+  }
+  document.getElementById('chirpSend').addEventListener('click', sendMsg);
+  input.addEventListener('keydown', function(e){ if (e.key === 'Enter') sendMsg(); });
+
+  document.querySelectorAll('.chirp-quick-btn').forEach(function(el){
+    el.addEventListener('click', function(){
+      var m = this.getAttribute('data-msg');
+      addMsg(m, 'user');
+      botReply(m);
+      this.style.opacity = '0.4';
+      this.style.pointerEvents = 'none';
+    });
+  });
+})();
+</script>
+</body>
+</html>
