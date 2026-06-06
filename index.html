@@ -88,6 +88,27 @@ section{padding:80px 0}
 .cta-btn:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,0,0,0.25)}
 footer{background:var(--slate-900);color:var(--slate-400);padding:40px 0;text-align:center;font-size:14px}
 footer a{color:var(--teal-light);text-decoration:none}
+
+  .sticky-cta {
+    position: fixed; bottom: 0; left: 0; right: 0; z-index: 9997;
+    background: white; border-top: 2px solid var(--teal-light);
+    padding: 10px 16px; display: none; align-items: center;
+    justify-content: center; gap: 16px; box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+    flex-wrap: wrap;
+  }
+  .sticky-cta p { margin:0; font-size:14px; color:var(--slate-700); font-weight:600; }
+  .sticky-cta a {
+    background: var(--teal); color: white; padding: 8px 20px; border-radius: 8px;
+    font-size: 14px; font-weight: 700; text-decoration: none; white-space: nowrap;
+    transition: background 0.2s;
+  }
+  .sticky-cta a:hover { background: var(--teal-dark); }
+  @media (max-width: 480px) {
+    .sticky-cta { padding: 8px 12px; gap: 8px; }
+    .sticky-cta p { font-size: 12px; }
+    .sticky-cta a { font-size: 13px; padding: 8px 14px; }
+  }
+
 @media(max-width:768px){.hero h1{font-size:32px}.stats{gap:24px}.stat-num{font-size:32px}section{padding:50px 0}}
 </style>
 </head>
@@ -109,6 +130,11 @@ footer a{color:var(--teal-light);text-decoration:none}
       <a href="#pricing" class="btn-primary">See Packages</a>
       <a href="#how" class="btn-secondary">How It Works</a>
     </div>
+    <p style="margin-top:24px; font-size:14px; color:#64748B;">
+      &#9989; 30-day money-back guarantee &nbsp;|&nbsp; 
+      &#9989; No long-term contract &nbsp;|&nbsp; 
+      &#9989; Free demo before you commit
+    </p>
   </div>
 </header>
 
@@ -141,6 +167,37 @@ footer a{color:var(--teal-light);text-decoration:none}
   </div>
 </section>
 
+
+
+<!-- ==================== ROI CALCULATOR ==================== -->
+<section style="background: var(--white);">
+  <div class="container" style="text-align:center;">
+    <div class="section-label">The Numbers Don't Lie</div>
+    <div class="section-title" style="margin:0 auto 8px;">How Much Are You Losing Every Month?</div>
+    <div class="section-subtitle" style="margin:0 auto 32px;">Drag the slider to see what missed bookings cost your practice.</div>
+    <style>
+      .roi-calc { max-width: 600px; margin: 0 auto; background: var(--slate-50); border-radius: 16px; padding: 32px; }
+      .roi-slider { width: 100%; -webkit-appearance: none; height: 8px; border-radius: 4px; background: var(--slate-200); outline: none; margin: 20px 0; }
+      .roi-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 28px; height: 28px; border-radius: 50%; background: var(--teal); cursor: pointer; box-shadow: 0 2px 8px rgba(13,148,136,0.3); }
+      .roi-result { font-size: 48px; font-weight: 800; color: var(--teal); letter-spacing: -1px; }
+      .roi-bar { display: flex; align-items: center; gap: 16px; margin-top: 24px; }
+      .roi-bar-loss { flex: 1; background: #FEE2E2; border-radius: 8px; padding: 12px; color: #DC2626; font-weight: 700; }
+      .roi-bar-save { flex: 1; background: #D1FAE5; border-radius: 8px; padding: 12px; color: #059669; font-weight: 700; }
+    </style>
+    <div class="roi-calc">
+      <p style="font-size:18px; font-weight:600; color:var(--slate-800);">Missed bookings per week</p>
+      <p style="font-size:42px; font-weight:800; color:var(--teal);" id="roiCount">5</p>
+      <input type="range" min="2" max="30" value="5" class="roi-slider" id="roiSlider" oninput="document.getElementById('roiCount').textContent=this.value; var m=this.value*4*150; document.getElementById('roiLoss').textContent='£'+m.toLocaleString()+'/mo lost'; document.getElementById('roiSave').textContent='£'+Math.round(m*0.7).toLocaleString()+'/mo saved';">
+      <div class="roi-bar">
+        <div class="roi-bar-loss">🔴 <span id="roiLoss">£3,000/mo lost</span></div>
+        <div class="roi-bar-save">🟢 <span id="roiSave">£2,100/mo saved</span></div>
+      </div>
+      <p style="font-size:13px; color:var(--slate-600); margin-top:16px;">Based on avg. booking value £150. A Chirp chatbot captures ~70% of after-hours enquiries.</p>
+      <a href="#pricing" class="btn-primary" style="display:inline-block; margin-top:20px; text-decoration:none;">See How Little It Costs →</a>
+    </div>
+  </div>
+</section>
+
 <section id="how" style="background: var(--slate-50);">
   <div class="container" style="text-align:center;">
     <div class="section-label">How It Works</div>
@@ -166,11 +223,59 @@ footer a{color:var(--teal-light);text-decoration:none}
   </div>
 </section>
 
+
+<!-- ==================== FOR YOUR INDUSTRY ==================== -->
+<section style="background: var(--slate-50);">
+  <div class="container" style="text-align:center;">
+    <div class="section-label">Who We Help</div>
+    <div class="section-title" style="margin:0 auto 8px;">Built for UK healthcare & professional services</div>
+    <div class="section-subtitle" style="margin:0 auto;">Your chatbot is trained on the questions YOUR patients ask. Not generic templates.</div>
+    <div class="cards-grid" style="margin-top:48px;">
+      <div class="card" style="text-align:left;">
+        <div style="font-size:32px; margin-bottom:12px;">🦷</div>
+        <h3>Private Dentists</h3>
+        <p style="font-size:14px;color:var(--slate-600);">"How much is Invisalign?" "Do you do emergency appointments?" "Can I book a check-up?" — answered in seconds, booked 24/7.</p>
+        <p style="font-size:12px;color:var(--teal);font-weight:600;margin-top:8px;">Typical result: 8-15 new bookings/month</p>
+      </div>
+      <div class="card" style="text-align:left;">
+        <div style="font-size:32px; margin-bottom:12px;">🩺</div>
+        <h3>Physiotherapy Clinics</h3>
+        <p style="font-size:14px;color:var(--slate-600);">"Do you treat back pain?" "Do I need a GP referral?" "What's your cancellation policy?" — every question handled instantly.</p>
+        <p style="font-size:12px;color:var(--teal);font-weight:600;margin-top:8px;">Typical result: 5-10 new patients/month</p>
+      </div>
+      <div class="card" style="text-align:left;">
+        <div style="font-size:32px; margin-bottom:12px;">🏥</div>
+        <h3>Private GP Practices</h3>
+        <p style="font-size:14px;color:var(--slate-600);">"How much for a consultation?" "Do you do blood tests?" "Can I see a GP today?" — qualify and book new patients automatically.</p>
+        <p style="font-size:12px;color:var(--teal);font-weight:600;margin-top:8px;">Typical result: 10-20 new patients/month</p>
+      </div>
+      <div class="card" style="text-align:left;">
+        <div style="font-size:32px; margin-bottom:12px;">⚖️</div>
+        <h3>Solicitors & Law Firms</h3>
+        <p style="font-size:14px;color:var(--slate-600);">"How much is a consultation?" "Do you handle employment law?" — qualify clients and book consultations around the clock.</p>
+        <p style="font-size:12px;color:var(--teal);font-weight:600;margin-top:8px;">Typical result: 3-7 new consultations/month</p>
+      </div>
+      <div class="card" style="text-align:left;">
+        <div style="font-size:32px; margin-bottom:12px;">✂️</div>
+        <h3>Salons & Aesthetics</h3>
+        <p style="font-size:14px;color:var(--slate-600);">"How much for a balayage?" "What's your availability this week?" — instant answers, instant bookings, zero missed revenue.</p>
+        <p style="font-size:12px;color:var(--teal);font-weight:600;margin-top:8px;">Typical result: 10-20 new bookings/month</p>
+      </div>
+      <div class="card" style="text-align:left;">
+        <div style="font-size:32px; margin-bottom:12px;">🔧</div>
+        <h3>Trades & Services</h3>
+        <p style="font-size:14px;color:var(--slate-600);">"Can you give me a quote?" "Are you available this week?" — collect job details and book callbacks while you're on site.</p>
+        <p style="font-size:12px;color:var(--teal);font-weight:600;margin-top:8px;">Typical result: 5-10 leads/week captured</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="pricing">
   <div class="container" style="text-align:center;">
     <div class="section-label">Pricing</div>
     <div class="section-title" style="margin:0 auto 8px;">Simple, transparent packages</div>
-    <div class="section-subtitle" style="margin:0 auto;">One-off setup + monthly maintenance. No hidden fees. Cancel anytime.</div>
+    <div class="section-subtitle" style="margin:0 auto;">One-off setup + monthly maintenance. No hidden fees. Cancel anytime. <strong>30-day money-back guarantee on all packages.</strong></div>
     <div class="pricing-cards">
       <div class="pricing-card">
         <h3>Starter</h3>
@@ -220,6 +325,39 @@ footer a{color:var(--teal-light);text-decoration:none}
         <a href="#contact" class="pricing-btn outline">Let's Talk</a>
       </div>
     </div>
+  </div>
+</section>
+
+
+
+<!-- ==================== CHIRP vs RECEPTIONIST ==================== -->
+<section>
+  <div class="container" style="text-align:center;">
+    <div class="section-label">The Comparison</div>
+    <div class="section-title" style="margin:0 auto 8px;">Chirp vs Hiring a Receptionist</div>
+    <div class="section-subtitle" style="margin:0 auto 32px;">Same job. Fraction of the cost.</div>
+    <style>
+      .comp-table { width: 100%; max-width: 700px; margin: 0 auto; border-collapse: collapse; font-size: 15px; }
+      .comp-table th { background: var(--teal); color: white; padding: 14px 16px; text-align: left; font-size: 16px; }
+      .comp-table th:last-child { background: #115E59; }
+      .comp-table td { padding: 12px 16px; border-bottom: 1px solid var(--slate-200); }
+      .comp-table tr td:first-child { font-weight: 600; color: var(--slate-700); }
+      .comp-table .win { background: #D1FAE5; color: #059669; font-weight: 700; }
+      .comp-table .lose { color: #DC2626; font-weight: 600; }
+      @media (max-width: 600px) { .comp-table { font-size: 13px; } .comp-table th, .comp-table td { padding: 10px; } }
+    </style>
+    <table class="comp-table" style="margin-top:48px;">
+      <tr><th>Feature</th><th>👩‍💼 Receptionist</th><th>🐦 Chirp Chatbot</th></tr>
+      <tr><td>Monthly cost</td><td class="lose">£1,200 - £2,000</td><td class="win">£99 - £199</td></tr>
+      <tr><td>Working hours</td><td class="lose">9-5, Mon-Fri</td><td class="win">24/7, every day</td></tr>
+      <tr><td>Response time</td><td class="lose">Minutes to hours</td><td class="win">Under 5 seconds</td></tr>
+      <tr><td>Sick days / holidays</td><td class="lose">Yes</td><td class="win">Never</td></tr>
+      <tr><td>Handles 3 chats at once</td><td class="lose">No</td><td class="win">Unlimited</td></tr>
+      <tr><td>Bookings captured overnight</td><td class="lose">No</td><td class="win">Yes — every single one</td></tr>
+      <tr><td>Qualifies leads</td><td class="lose">Sometimes</td><td class="win">Every conversation</td></tr>
+      <tr><td>Setup time</td><td>2-4 weeks hiring</td><td class="win">3-5 days</td></tr>
+    </table>
+    <p style="margin-top:24px; font-size:14px; color:var(--slate-600);">Chirp doesn't replace your team. It handles the repetitive stuff so your humans do high-value work.</p>
   </div>
 </section>
 
@@ -283,8 +421,9 @@ footer a{color:var(--teal-light);text-decoration:none}
   <div class="container">
     <div class="section-title">Ready to give your website a voice?</div>
     <p class="section-subtitle">Book a free 15-minute call. We'll look at your website, discuss your needs, and tell you honestly if a chatbot makes sense for your business. No hard sell.</p>
+    <p style="margin-bottom:16px; font-size:14px; color:#CCFBF1;">&#9989; 30-day money-back guarantee &nbsp;|&nbsp; &#9989; Cancel anytime &nbsp;|&nbsp; &#9989; Free demo first</p>
     <a href="https://calendly.com/chirp-uk-ai/15min" target="_blank" class="cta-btn">Book Your Free Chat</a>
-    <p style="margin-top:20px;color:#99F6E4;font-size:14px;">Or email: <a href="/cdn-cgi/l/email-protection#3a595253484a144f51145b537a5d575b535614595557" style="color:#99F6E4; text-decoration:underline;"><span class="__cf_email__" data-cfemail="d2b1babba0a2fca7b9fcb3bb92b5bfb3bbbefcb1bdbf">[email&#160;protected]</span></a></p>
+    <p style="margin-top:20px;color:#99F6E4;font-size:14px;">Or email: <a href="/cdn-cgi/l/email-protection#94f7fcfde6e4bae1ffbaf5fdd4f3f9f5fdf8baf7fbf9" style="color:#99F6E4; text-decoration:underline;"><span class="__cf_email__" data-cfemail="73101b1a01035d06185d121a33141e121a1f5d101c1e">[email&#160;protected]</span></a></p>
   </div>
 </section>
 
@@ -294,7 +433,7 @@ footer a{color:var(--teal-light);text-decoration:none}
       <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='45' r='15' fill='%230D9488'/%3E%3Cpath d='M50 60 L35 80 L65 80 Z' fill='%230D9488'/%3E%3Ccircle cx='42' cy='38' r='4' fill='white'/%3E%3Cpath d='M25 35 Q40 20 55 35' fill='none' stroke='%230D9488' stroke-width='6' stroke-linecap='round'/%3E%3C/svg%3E" alt="Chirp Logo" style="width:32px; height:32px;">
       <p style="margin:0; font-size:16px; font-weight:700; color:#94A3B8;">Chirp&trade; &mdash; AI Chatbots for UK Business</p>
     </div>
-    <p style="font-size:13px; color:#64748B; margin-bottom:4px;"><a href="/cdn-cgi/l/email-protection#53303b3a21237d26387d323a13343e323a3f7d303c3e" style="color:#64748B; text-decoration:underline;"><span class="__cf_email__" data-cfemail="b1d2d9d8c3c19fc4da9fd0d8f1d6dcd0d8dd9fd2dedc">[email&#160;protected]</span></a> &nbsp;|&nbsp; Based in Glasgow, United Kingdom 🇬🇧</p>
+    <p style="font-size:13px; color:#64748B; margin-bottom:4px;"><a href="/cdn-cgi/l/email-protection#1f7c77766d6f316a74317e765f78727e7673317c7072" style="color:#64748B; text-decoration:underline;"><span class="__cf_email__" data-cfemail="e3808b8a9193cd9688cd828aa3848e828a8fcd808c8e">[email&#160;protected]</span></a> &nbsp;|&nbsp; Based in Glasgow, United Kingdom 🇬🇧</p>
     <hr style="border:none; border-top:1px solid #334155; margin:16px auto; max-width:200px;">
     <p style="font-size:12px; color:#F59E0B; margin-bottom:4px; font-weight:700;">&#9888; LEGAL NOTICE &#9888;</p>
     <p style="font-size:12px; color:#64748B; margin-bottom:4px;"><strong>&copy; 2026 Krzysztof Jurkiewicz trading as Chirp&trade;. All rights reserved.</strong></p>
@@ -491,5 +630,22 @@ footer a{color:var(--teal-light);text-decoration:none}
 
 <!-- Tidio Live Chat -->
 <script src="//code.tidio.co/7bex29fuoosvqp6fopuqrijcimj203pw.js" async></script>
-</body>
+
+
+<!-- ============ STICKY CTA BAR ============ -->
+<div class="sticky-cta" id="stickyCta">
+  <p>🚀 Ready to give your website a voice?</p>
+  <a href="https://calendly.com/chirp-uk-ai/15min" target="_blank">Book Free Demo →</a>
+</div>
+<script>
+(function(){
+  var bar = document.getElementById('stickyCta');
+  if (!bar) return;
+  window.addEventListener('scroll', function(){
+    bar.style.display = window.scrollY > 500 ? 'flex' : 'none';
+  });
+})();
+</script>
+
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a07884e94c7cb3b1',t:'MTc4MDc2MDQ2NA=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
